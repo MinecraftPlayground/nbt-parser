@@ -1,10 +1,8 @@
 import { Tag } from "./tag.ts";
 
 /**
- * TAG_Long interface
- * @interface LongTag
- * @extends Tag
+ * TAG_Long type
+ * @type longTag
  */
-export interface LongTag extends Tag {
-    value : number
-}
+export type longTag = Tag<number>
+

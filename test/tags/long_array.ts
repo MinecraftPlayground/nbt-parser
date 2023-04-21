@@ -1,10 +1,8 @@
 import { Tag } from "./tag.ts";
 
 /**
- * TAG_Long_Array interface
- * @interface LongArrayTag
- * @extends Tag
+ * TAG_Long_Array type
+ * @type longArrayTag
  */
-export interface LongArrayTag extends Tag {
-    value : number[]
-}
+export type longArrayTag = Tag<number[]>
+

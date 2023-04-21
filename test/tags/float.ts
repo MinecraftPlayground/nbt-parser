@@ -1,10 +1,8 @@
 import { Tag } from "./tag.ts";
 
 /**
- * TAG_Float interface
- * @interface FloatTag
- * @extends Tag
+ * TAG_Float type
+ * @type FloatTag
  */
-export interface FloatTag extends Tag {
-    value : number
-}
+export type floatTag = Tag<number>
+

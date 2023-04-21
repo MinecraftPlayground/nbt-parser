@@ -1,10 +1,8 @@
 import { Tag } from "./tag.ts";
 
 /**
- * TAG_Short interface
- * @interface ShortTag
- * @extends Tag
+ * TAG_Short_Array type
+ * @type shortTag
  */
-export interface ShortTag extends Tag {
-    value : number
-}
+export type shortTag = Tag<number>
+

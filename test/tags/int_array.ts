@@ -1,10 +1,8 @@
 import { Tag } from "./tag.ts";
 
 /**
- * TAG_Int_Array interface
- * @interface IntArrayTag
- * @extends Tag
+ * TAG_Int_Array type
+ * @type intArrayTag
  */
-export interface IntArrayTag extends Tag {
-    value : number[]
-}
+export type intArrayTag = Tag<number[]>
+

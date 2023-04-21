@@ -1,11 +1,7 @@
 import { Tag } from "./tag.ts";
 
 /**
- * TAG_Byte_Array interface
- * @interface ByteArrayTag
- * @extends Tag
+ * TAG_Byte_Array type
+ * @type byteArrayTag
  */
-export interface ByteArrayTag extends Tag {
-    value : number[]
-}
-
+export type byteArrayTag = Tag<number[]>

@@ -2,7 +2,8 @@
  * TAG interface
  * @interface TAG
  */
-export interface Tag {
+export interface Tag<type> {
     name : string,
-    length : number
+    length : number,
+    value : type
 }
