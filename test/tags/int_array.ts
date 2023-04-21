@@ -5,4 +5,3 @@ import { Tag } from "./tag.ts";
  * @type intArrayTag
  */
 export type intArrayTag = Tag<number[]>
-
