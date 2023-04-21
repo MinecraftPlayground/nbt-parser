@@ -80,3 +80,22 @@ export default async function parser(buffer : ArrayBuffer) {
 }
 
 
+const nbt = {
+    type: 'compound',
+    value: {
+        stringNameKey: {
+            type: 'string',
+            value: 'value'
+        },
+        compoundNameKey: {
+            type: 'compound',
+            value: {
+                byteNameKey: {
+                    type: 'byte',
+                    value: 5
+                }
+            }
+        }
+    }
+}
+
