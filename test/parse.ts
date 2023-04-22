@@ -4,12 +4,13 @@ import { double } from "./parse/double.ts";
 import { float } from "./parse/float.ts";
 import { int } from "./parse/int.ts";
 import { intArray } from "./parse/int_array.ts";
+import { longArray } from "./parse/long_array.ts";
 
 export function parse(buffer : ArrayBuffer) {
     const data = new DataView(buffer)
 
     for (let charIndex = 0; charIndex < data.byteLength; charIndex++) {
-        console.log(charIndex);
+        // console.log(charIndex);
         
         if (data.getInt8(charIndex) === 7) {
             const byteArrayTag = byteArray(data.buffer.slice(charIndex + 1))
@@ -40,6 +41,11 @@ export function parse(buffer : ArrayBuffer) {
             const intTag = int(data.buffer.slice(charIndex + 1))
             console.log(intTag);
             charIndex = charIndex + intTag.length - 1
+        }
+        if (data.getInt8(charIndex) === 12) {
+            const longArrayTag = longArray(data.buffer.slice(charIndex + 1))
+            console.log(longArrayTag);
+            charIndex = charIndex + longArrayTag.length - 1
         }
     }
 }
