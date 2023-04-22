@@ -1,4 +1,4 @@
-import getNameLength from "./get_name_length.ts";
+
 
 export default async function parser(buffer : ArrayBuffer) {
     const data = new DataView(buffer);
@@ -17,7 +17,7 @@ export default async function parser(buffer : ArrayBuffer) {
             }
             // byte
             case 1: {
-                const nameLength = getNameLength(data, charIndex)
+                const nameLength = 0
                 const name = new TextDecoder('utf-8').decode(data.buffer.slice(charIndex + 3, charIndex + 3 + nameLength))
                 const value = data.getUint8(charIndex + 3 + nameLength + 1)
                 console.log(`${charIndex.toString().padStart(6, '0')} 1: TAG_Byte: '${name}', NameLength: ${nameLength}, value: ${value}`);
@@ -79,6 +79,7 @@ export default async function parser(buffer : ArrayBuffer) {
     }
 }
 
+JSON.parse
 
 const nbt = {
     type: 'compound',
