@@ -6,4 +6,3 @@ console.log('-'.repeat(100));
 
 parse(await map.arrayBuffer())
 
-
