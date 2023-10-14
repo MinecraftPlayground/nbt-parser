@@ -13,7 +13,7 @@ import { TagString } from "./tag_string.d.ts";
 
 /**
  * TAG_Compound type
- * @type TagCompound
+ * @interface TagCompound
  */
 export interface TagCompound<
     TagType extends TagByte
