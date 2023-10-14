@@ -1,5 +1,6 @@
 import { TagByte } from "./tag_byte.d.ts";
 import { TagByteArray } from "./tag_byte_array.d.ts";
+import { TagCompound } from "./tag_compound.d.ts";
 import { TagDouble } from "./tag_double.d.ts";
 import { TagFloat } from "./tag_float.d.ts";
 import { TagInt } from "./tag_int.d.ts";
@@ -23,6 +24,7 @@ export type TagList<
     | TagByteArray
     | TagString
     | TagList<TagType>
+    | TagCompound
     | TagIntArray
     | TagLongArray
 > = TagType[];
