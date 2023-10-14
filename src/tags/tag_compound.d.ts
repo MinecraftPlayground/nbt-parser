@@ -15,8 +15,8 @@ import { TagString } from "./tag_string.d.ts";
  * TAG_Compound type
  * @interface TagCompound
  */
-export interface TagCompound<
-    TagType extends TagByte
+export interface TagCompound {
+    [key : string] : TagByte
     | TagShort
     | TagInt
     | TagLong
@@ -24,9 +24,9 @@ export interface TagCompound<
     | TagDouble
     | TagByteArray
     | TagString
-    | TagList<TagType>
     | TagIntArray
     | TagLongArray
-> {
-    [key : string] : TagType | TagCompound<TagType> | TagList<TagType>;
+    | TagCompound
+    | TagList<typeof key>;
 }
+
