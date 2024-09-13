@@ -2,6 +2,6 @@ import { Tag } from "./tag.ts";
 
 /**
  * TAG_List type
- * @type listTag
+ * @type ListTag
  */
-export type listTag<type> = Tag<type[]>
+export type ListTag<type> = Tag<type[]>

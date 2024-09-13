@@ -2,7 +2,7 @@ import { Tag } from "./tag.ts";
 
 /**
  * TAG_String type
- * @type stringTag
+ * @type StringTag
  */
-export type stringTag = Tag<string>
+export type StringTag = Tag<string>
 

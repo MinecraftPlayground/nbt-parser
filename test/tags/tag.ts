@@ -14,7 +14,7 @@ export interface Tag<type> {
     /**
      * Length of the entire tag, including all bytes.
      */
-    length : number,
+    byteLength : number,
     /**
      * Value or children of the tag.
      */

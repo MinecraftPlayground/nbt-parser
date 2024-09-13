@@ -2,7 +2,7 @@ import { Tag } from "./tag.ts";
 
 /**
  * TAG_Int type
- * @type intTag
+ * @type IntTag
  */
-export type intTag = Tag<number>
+export type IntTag = Tag<number>
 

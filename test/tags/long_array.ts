@@ -2,7 +2,7 @@ import { Tag } from "./tag.ts";
 
 /**
  * TAG_Long_Array type
- * @type longArrayTag
+ * @type LongArrayTag
  */
-export type longArrayTag = Tag<number[]>
+export type LongArrayTag = Tag<number[]>
 

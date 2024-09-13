@@ -4,4 +4,4 @@ import { Tag } from "./tag.ts";
  * TAG_Compound type
  * @type compoundTag
  */
-export type compoundTag = Tag<{}>
+export type CompoundTag = Tag<{}>

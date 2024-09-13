@@ -2,6 +2,6 @@ import { Tag } from "./tag.ts";
 
 /**
  * TAG_Int_Array type
- * @type intArrayTag
+ * @type IntArrayTag
  */
-export type intArrayTag = Tag<number[]>
+export type IntArrayTag = Tag<number[]>
