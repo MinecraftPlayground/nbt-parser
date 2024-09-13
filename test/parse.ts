@@ -11,41 +11,49 @@ export function parse(buffer : ArrayBuffer) {
 
     for (let charIndex = 0; charIndex < data.byteLength; charIndex++) {
         // console.log(charIndex);
-        
-        if (data.getInt8(charIndex) === 7) {
-            const byteArrayTag = byteArray(data.buffer.slice(charIndex + 1))
-            console.log(byteArrayTag);
-            charIndex = charIndex + byteArrayTag.length - 1
-        }
-        if (data.getInt8(charIndex) === 1) {
-            const byteTag = byte(data.buffer.slice(charIndex + 1))
-            console.log(byteTag);
-            charIndex = charIndex + byteTag.length - 1
-        }
-        if (data.getInt8(charIndex) === 6) {
-            const doubleTag = double(data.buffer.slice(charIndex + 1))
-            console.log(doubleTag);
-            charIndex = charIndex + doubleTag.length - 1
-        }
-        if (data.getInt8(charIndex) === 5) {
-            const floatTag = float(data.buffer.slice(charIndex + 1))
-            console.log(floatTag);
-            charIndex = charIndex + floatTag.length - 1
-        }
-        if (data.getInt8(charIndex) === 11) {
-            const intArrayTag = intArray(data.buffer.slice(charIndex + 1))
-            console.log(intArrayTag);
-            charIndex = charIndex + intArrayTag.length - 1
-        }
-        if (data.getInt8(charIndex) === 3) {
-            const intTag = int(data.buffer.slice(charIndex + 1))
-            console.log(intTag);
-            charIndex = charIndex + intTag.length - 1
-        }
-        if (data.getInt8(charIndex) === 12) {
-            const longArrayTag = longArray(data.buffer.slice(charIndex + 1))
-            console.log(longArrayTag);
-            charIndex = charIndex + longArrayTag.length - 1
+        switch(data.getInt8(charIndex)) {
+            case 7: {
+                const byteArrayTag = byteArray(data.buffer.slice(charIndex + 1))
+                console.log(byteArrayTag);
+                charIndex = charIndex + byteArrayTag.byteLength - 1
+                break;
+            }
+            case 1: {
+                const byteTag = byte(data.buffer.slice(charIndex + 1))
+                console.log(byteTag);
+                charIndex = charIndex + byteTag.byteLength - 1
+                break;
+            }
+            case 6: {
+                const doubleTag = double(data.buffer.slice(charIndex + 1))
+                console.log(doubleTag);
+                charIndex = charIndex + doubleTag.byteLength - 1
+                break;
+            }
+            case 5: {
+                const floatTag = float(data.buffer.slice(charIndex + 1))
+                console.log(floatTag);
+                charIndex = charIndex + floatTag.byteLength - 1
+                break;
+            }
+            case 11: {
+                const intArrayTag = intArray(data.buffer.slice(charIndex + 1))
+                console.log(intArrayTag);
+                charIndex = charIndex + intArrayTag.byteLength - 1
+                break;
+            }
+            case 3: {
+                const intTag = int(data.buffer.slice(charIndex + 1))
+                console.log(intTag);
+                charIndex = charIndex + intTag.byteLength - 1
+                break;
+            }
+            case 12: {
+                const longArrayTag = longArray(data.buffer.slice(charIndex + 1))
+                console.log(longArrayTag);
+                charIndex = charIndex + longArrayTag.byteLength - 1
+                break;
+            }
         }
     }
 }
