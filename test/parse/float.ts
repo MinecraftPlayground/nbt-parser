@@ -1,5 +1,5 @@
 import { getTagName } from "../get_tag_name.ts";
-import { FloatTag } from "../tags/float.ts";
+import { FloatTag } from "../tags/float_tag.ts";
 
 export function float(buffer : ArrayBuffer) : FloatTag {
     

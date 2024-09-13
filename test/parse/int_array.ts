@@ -1,7 +1,7 @@
 import { getTagName } from "../get_tag_name.ts";
-import { intArrayTag } from "../tags/int_array.ts";
+import { IntArrayTag } from "../tags/int_array_tag.ts";
 
-export function intArray(buffer : ArrayBuffer) : intArrayTag {
+export function intArray(buffer : ArrayBuffer) : IntArrayTag {
     
     const data = new DataView(buffer)
     const nameLength = data.getUint16(0, false)
@@ -16,7 +16,7 @@ export function intArray(buffer : ArrayBuffer) : intArrayTag {
     return {
         type: 'TAG_Int_Array',
         name: getTagName(buffer.slice(2), nameLength),
-        length: 1 + 2 + nameLength + 4 + dataLength,
+        byteLength: 1 + 2 + nameLength + 4 + dataLength,
         value: values
     }
 }

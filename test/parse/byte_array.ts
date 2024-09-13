@@ -1,5 +1,5 @@
 import { getTagName } from "../get_tag_name.ts";
-import { ByteArrayTag } from "../tags/byte_array.ts";
+import { ByteArrayTag } from "../tags/byte_array_tag.ts";
 
 export function byteArray(buffer : ArrayBuffer) : ByteArrayTag {
     

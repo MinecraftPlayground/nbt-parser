@@ -1,7 +1,7 @@
 import { getTagName } from "../get_tag_name.ts";
-import { longArrayTag } from "../tags/long_array.ts";
+import { LongArrayTag } from "../tags/long_array_tag.ts";
 
-export function longArray(buffer : ArrayBuffer) : longArrayTag {
+export function longArray(buffer : ArrayBuffer) : LongArrayTag {
     
     const data = new DataView(buffer)
     const nameLength = data.getUint16(0, false)
@@ -16,7 +16,7 @@ export function longArray(buffer : ArrayBuffer) : longArrayTag {
     return {
         type: 'TAG_Long_Array',
         name: getTagName(buffer.slice(2), nameLength),
-        length: 1 + 2 + nameLength + 4 + dataLength,
+        byteLength: 1 + 2 + nameLength + 4 + dataLength,
         value: values
     }
 }

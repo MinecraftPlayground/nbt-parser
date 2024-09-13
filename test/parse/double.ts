@@ -1,5 +1,5 @@
 import { getTagName } from "../get_tag_name.ts";
-import { DoubleTag } from "../tags/double.ts";
+import { DoubleTag } from "../tags/double_tag.ts";
 
 export function double(buffer : ArrayBuffer) : DoubleTag {
     
