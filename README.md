@@ -1,5 +1,5 @@
 # NBT-Parser
-The following bytes are represented in binary:
+The following bytes are represented in binary. All values are represented in Big Endian.
 
 ## Byte
 |         | Identifier | Name Length | Name | Value |
