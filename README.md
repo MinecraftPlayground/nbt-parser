@@ -1,4 +1,77 @@
 # NBT-Parser
+The following bytes are represented in binary:
+
+## Byte
+|         | Identifier | Name Length | Name | Value |
+|---------|------------|-------------|------|-------|
+| n Bytes | 1          | 2           | n    | 1     |
+| Default | `01`       | `XX` `XX`   | `..` | `XX`  |
+
+## Short
+|         | Identifier | Name Length | Name | Value     |
+|---------|------------|-------------|------|-----------|
+| n Bytes | 1          | 2           | n    | 2         |
+| Default | `02`       | `XX` `XX`   | `..` | `XX` `XX` |
+
+## Int
+|         | Identifier | Name Length | Name | Value               |
+|---------|------------|-------------|------|---------------------|
+| n Bytes | 1          | 2           | n    | 4                   |
+| Default | `03`       | `XX` `XX`   | `..` | `XX` `XX` `XX` `XX` |
+
+## Long
+|         | Identifier | Name Length | Name | Value                                   |
+|---------|------------|-------------|------|-----------------------------------------|
+| n Bytes | 1          | 2           | n    | 8                                       |
+| Default | `04`       | `XX` `XX`   | `..` | `XX` `XX` `XX` `XX` `XX` `XX` `XX` `XX` |
+
+## Float
+|         | Identifier | Name Length | Name | Value               |
+|---------|------------|-------------|------|---------------------|
+| n Bytes | 1          | 2           | n    | 4                   |
+| Default | `05`       | `XX` `XX`   | `..` | `XX` `XX` `XX` `XX` |
+
+## Double
+|         | Identifier | Name Length | Name | Value                                   |
+|---------|------------|-------------|------|-----------------------------------------|
+| n Bytes | 1          | 2           | n    | 8                                       |
+| Default | `06`       | `XX` `XX`   | `..` | `XX` `XX` `XX` `XX` `XX` `XX` `XX` `XX` |
+
+## Byte Array
+|         | Identifier | Name Length | Name | Array Length        | Value n |
+|---------|------------|-------------|------|---------------------|---------|
+| n Bytes | 1          | 2           | n    | 4                   | 1       |
+| Default | `07`       | `XX` `XX`   | `..` | `XX` `XX` `XX` `XX` | `XX`    |
+
+## String
+|         | Identifier | Name Length | Name | String Length | Value n |
+|---------|------------|-------------|------|---------------|---------|
+| n Bytes | 1          | 2           | n    | 2             | 1       |
+| Default | `08`       | `XX` `XX`   | `..` | `XX` `XX`     | `XX`    |
+
+## List
+|         | Identifier | Name Length | Name | Type Identifier | List Length         | Value n |
+|---------|------------|-------------|------|-----------------|---------------------|---------|
+| n Bytes | 1          | 2           | n    | 1               | 4                   | n       |
+| Default | `09`       | `XX` `XX`   | `..` | `XX`            | `XX` `XX` `XX` `XX` | `..`    |
+
+## Compound
+|         | Identifier | Name Length | Name | Values | Terminator |
+|---------|------------|-------------|------|--------|------------|
+| n Bytes | 1          | 2           | n    | n      | 1          |
+| Default | `0A`       | `XX` `XX`   | `..` | `..`   | `00`       |
+
+## Int Array
+|         | Identifier | Name Length | Name | Array Length        | Value n             |
+|---------|------------|-------------|------|---------------------|---------------------|
+| n Bytes | 1          | 2           | n    | 4                   | 4                   |
+| Default | `0B`       | `XX` `XX`   | `..` | `XX` `XX` `XX` `XX` | `XX` `XX` `XX` `XX` |
+
+## Long Array
+|         | Identifier | Name Length | Name | Array Length        | Value n                                 |
+|---------|------------|-------------|------|---------------------|-----------------------------------------|
+| n Bytes | 1          | 2           | n    | 4                   | 8                                       |
+| Default | `0C`       | `XX` `XX`   | `..` | `XX` `XX` `XX` `XX` | `XX` `XX` `XX` `XX` `XX` `XX` `XX` `XX` |
 
 ```js
 const map = await fetch('./map.dat').then(response => response.blob())
