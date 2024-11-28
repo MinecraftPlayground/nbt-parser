@@ -1,5 +1,7 @@
-export function getTagName(view : DataView) : string {
-  const nameLength = view.getUint16(0, false);
+import { Reader } from "../reader.ts";
 
-  return new TextDecoder().decode(view.buffer.slice(3, 3 + nameLength));
+export function getTagName(reader : ReturnType<typeof Reader>) : string {
+  const nameLength = reader.read(2).getUint16(0, false);
+
+  return new TextDecoder().decode(reader.read(nameLength));
 }
