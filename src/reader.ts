@@ -5,9 +5,9 @@ export function Reader(buffer : ArrayBuffer) {
   return {
     done: () => done,
     read: (bytes : number) => {
-      console.log(`Reading ${bytes} byte(s) at position ${pointer} from max ${buffer.byteLength}, reading ${new DataView(buffer.slice(pointer, pointer+1)).getUint8(0)}`);
-
+      
       const data = buffer.slice(pointer, Math.min(pointer + bytes, buffer.byteLength))
+      console.log(`Reading ${bytes} byte(s) at position ${pointer} from max ${buffer.byteLength}, reading ${new Uint8Array(data)}`);
       
       pointer += bytes;
       if (pointer > buffer.byteLength) {
