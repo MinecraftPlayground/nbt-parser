@@ -2,17 +2,26 @@ import { BinaryReader } from 'jsr:@typescriptplayground/binary-reader'
 import { tagTypes } from "../tag_type.ts";
 import { getTagName } from "./get_tag_name.ts";
 
-function parser(nbtData : any, reader : BinaryReader) : unknown {
+function parser(nbtData : any, reader : BinaryReader, tagType? : number) : unknown {
 
-
-  const type = reader.readUint8()
-  const tagName = getTagName(reader)
+  let tagName = '';
+  let type;
+  
+  if (!tagType) {
+    type = reader.readUint8()
+    tagName = getTagName(reader)
+  }
 
   switch(type) {
     case tagTypes.BYTE: {
       console.log('reading BYTE')
 
-      nbtData[tagName] = reader.readInt8()
+      if (!tagType) {
+        nbtData[tagName] = reader.readInt8();
+      } else {
+        return reader.readInt8();
+      }
+      
 
       break;
     }
@@ -54,13 +63,13 @@ function parser(nbtData : any, reader : BinaryReader) : unknown {
       console.log('reading INT_ARRAY')
       
       const arrayLength = reader.readUint32();      
-      nbtData[tagName] = new Array(arrayLength).fill(0).map(() => reader.readUint64());
+      nbtData[tagName] = new Array(arrayLength).fill(0).map(() => reader.readUint32());
 
       break;
     }
 
     case tagTypes.LONG: {
-      console.log('reading Byte')
+      console.log('reading LONG')
 
       nbtData[tagName] = reader.readUint64();
 
@@ -100,6 +109,15 @@ function parser(nbtData : any, reader : BinaryReader) : unknown {
       break;
     }
 
+    case tagTypes.LIST: {
+      const arrayType = reader.readUint8();
+      const arrayLength = reader.readUint32();
+
+      console.log('reading LIST', arrayType, arrayLength)
+      nbtData[tagName] = new Array(arrayLength).fill(0).map(() => parser({}, reader, arrayType));
+      break;
+    }
+
     default: {
       console.log('reading Unknown', type, tagName);
       
@@ -107,7 +125,7 @@ function parser(nbtData : any, reader : BinaryReader) : unknown {
     }
   }
 
-  if(reader.bufferLeft.byteLength != 0) {
+  if(reader.bufferLeft) {
     parser(nbtData, reader);
   }
 
