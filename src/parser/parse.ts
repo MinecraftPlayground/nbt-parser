@@ -96,7 +96,7 @@ function parser(nbtData : any, reader : BinaryReader) : unknown {
     case tagTypes.COMPOUND: {
       console.log('reading COMPOUND')
 
-      nbtData[tagName] = parser(nbtData, reader);
+      nbtData[tagName] = parser({}, reader);
       break;
     }
 
