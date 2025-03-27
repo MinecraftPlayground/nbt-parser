@@ -1,4 +1,5 @@
 /**
  * This type represents a NBT Int.
  */
-export type Int = number;
+// deno-lint-ignore ban-types
+export type Int = number & {};

@@ -8,7 +8,7 @@ import type { Short } from "./short.ts";
 /**
  * This type represents a primitive NBT Type.
  */
-export type PrimitiveType = 
+export type PrimitiveType =
   | Byte
   | Short
   | Int

@@ -1,4 +1,5 @@
 /**
  * This type represents a NBT Float.
  */
-export type Float = number;
+// deno-lint-ignore ban-types
+export type Float = number & {};

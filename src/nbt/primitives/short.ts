@@ -1,4 +1,5 @@
 /**
  * This type represents a NBT Short.
  */
-export type Short = number;
+// deno-lint-ignore ban-types
+export type Short = number & {};

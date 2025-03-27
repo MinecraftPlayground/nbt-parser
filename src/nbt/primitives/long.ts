@@ -1,4 +1,5 @@
 /**
  * This type represents a NBT Long.
  */
-export type Long = bigint;
+// deno-lint-ignore ban-types
+export type Long = bigint & {};
