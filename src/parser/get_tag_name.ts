@@ -1,7 +1,8 @@
-import { Reader } from "../reader.ts";
+import { BinaryReader } from "jsr:@typescriptplayground/binary-reader";
 
-export function getTagName(reader : ReturnType<typeof Reader>) : string {
-  const nameLength = reader.read(2).getUint16(0, false);
+
+export function getTagName(reader : BinaryReader) : string {
+  const nameLength = reader.readUint16();
 
   return new TextDecoder().decode(reader.read(nameLength));
 }

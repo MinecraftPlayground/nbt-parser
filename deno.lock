@@ -2,7 +2,8 @@
   "version": "4",
   "specifiers": {
     "jsr:@std/assert@^1.0.7": "1.0.7",
-    "jsr:@std/internal@^1.0.5": "1.0.5"
+    "jsr:@std/internal@^1.0.5": "1.0.5",
+    "jsr:@typescriptplayground/binary-reader@*": "0.2.2"
   },
   "jsr": {
     "@std/assert@1.0.7": {
@@ -13,6 +14,9 @@
     },
     "@std/internal@1.0.5": {
       "integrity": "54a546004f769c1ac9e025abd15a76b6671ddc9687e2313b67376125650dc7ba"
+    },
+    "@typescriptplayground/binary-reader@0.2.2": {
+      "integrity": "c59ec48053ebf859afd67d30aeee579d87f369f71f24f22d7129860845cde524"
     }
   },
   "workspace": {

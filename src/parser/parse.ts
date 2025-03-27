@@ -1,114 +1,120 @@
-import { Reader } from "../reader.ts";
-import { tag } from "../tag_type.ts";
+import { BinaryReader } from 'jsr:@typescriptplayground/binary-reader'
+import { tagTypes } from "../tag_type.ts";
 import { getTagName } from "./get_tag_name.ts";
-import { popByte } from "./tag/pop_byte.ts";
-import { popByteArray } from "./tag/pop_byte_array.ts";
-import { popDouble } from "./tag/pop_double.ts";
-import { popFloat } from "./tag/pop_float.ts";
-import { popInt } from "./tag/pop_int.ts";
-import { popIntArray } from "./tag/pop_int_array.ts";
-import { popLong } from "./tag/pop_long.ts";
-import { popLongArray } from "./tag/pop_long_array.ts";
-import { popShort } from "./tag/pop_short.ts";
-import { popString } from "./tag/pop_string.ts";
+
+function parser(nbtData : any, reader : BinaryReader) : unknown {
 
 
-function parse(nbt : any, reader : ReturnType<typeof Reader>) {
-
-  console.log('reading TagType');
-  const type = reader.read(1).getUint8(0)
-
-  console.log('reading TagName');
-  const name = getTagName(reader)
+  const type = reader.readUint8()
+  const tagName = getTagName(reader)
 
   switch(type) {
+    case tagTypes.BYTE: {
+      console.log('reading BYTE')
+
+      nbtData[tagName] = reader.readInt8()
+
+      break;
+    }
+
+    case tagTypes.BYTE_ARRAY: {
+      console.log('reading BYTE_ARRAY')
+
+      const arrayLength = reader.readUint32();
+      nbtData[tagName] = new Array(arrayLength).fill(0).map(() => reader.readInt8());
+
+      break;
+    }
+
+    case tagTypes.DOUBLE: {
+      console.log('reading DOUBLE')
+
+      nbtData[tagName] = reader.readFloat64();
+
+      break;
+    }
+
+    case tagTypes.FLOAT: {
+      console.log('reading FLOAT')
+
+      nbtData[tagName] = reader.readFloat32();
+
+      break;
+    }
+
+    case tagTypes.INT: {
+      console.log('reading INT')
+
+      nbtData[tagName] = reader.readUint32();
+
+      break;
+    }
+
+    case tagTypes.INT_ARRAY: {
+      console.log('reading INT_ARRAY')
+      
+      const arrayLength = reader.readUint32();      
+      nbtData[tagName] = new Array(arrayLength).fill(0).map(() => reader.readUint64());
+
+      break;
+    }
+
+    case tagTypes.LONG: {
+      console.log('reading Byte')
+
+      nbtData[tagName] = reader.readUint64();
+
+      break;
+    }
+
+    case tagTypes.LONG_ARRAY: {
+      console.log('reading LONG_ARRAY')
+      
+      const arrayLength = reader.readUint32();
+      nbtData[tagName] = new Array(arrayLength).fill(0).map(() => reader.readUint64());
+
+      break;
+    }
+
+    case tagTypes.SHORT: {
+      console.log('reading SHORT')
+      
+      nbtData[tagName] = reader.readUint16();
+
+      break;
+    }
+
+    case tagTypes.STRING: {
+      console.log('reading STRING')
+      
+      const stringLength = reader.readUint16();
+      nbtData[tagName] = new TextDecoder().decode(reader.read(stringLength))
+
+      break;
+    }
+
+    case tagTypes.COMPOUND: {
+      console.log('reading COMPOUND')
+
+      nbtData[tagName] = parser(nbtData, reader);
+      break;
+    }
+
     default: {
-      console.log('reading Unknown');
+      console.log('reading Unknown', type, tagName);
       
       break;
     }
-    case tag.BYTE: {
-
-      console.log('reading Byte')
-      nbt[name] = popByte(reader)
-
-      break;
-    }
-    case tag.BYTE_ARRAY: {
-
-      console.log('reading Byte')
-      nbt[name] = popByteArray(reader)
-
-      break;
-    }
-    case tag.DOUBLE: {
-
-      console.log('reading Byte')
-      nbt[name] = popDouble(reader)
-
-      break;
-    }
-    case tag.FLOAT: {
-
-      console.log('reading Byte')
-      nbt[name] = popFloat(reader)
-
-      break;
-    }
-    case tag.INT: {
-
-      console.log('reading Byte')
-      nbt[name] = popInt(reader)
-
-      break;
-    }
-    case tag.INT_ARRAY: {
-
-      console.log('reading Byte')
-      nbt[name] = popIntArray(reader)
-
-      break;
-    }
-    case tag.LONG: {
-
-      console.log('reading Byte')
-      nbt[name] = popLong(reader)
-
-      break;
-    }
-    case tag.LONG_ARRAY: {
-
-      console.log('reading Byte')
-      nbt[name] = popLongArray(reader)
-
-      break;
-    }
-    case tag.SHORT: {
-
-      console.log('reading Byte')
-      nbt[name] = popShort(reader)
-
-      break;
-    }
-    case tag.STRING: {
-
-      console.log('reading Byte')
-      nbt[name] = popString(reader)
-
-      break;
-    }
   }
 
-  if(!reader.done()) {
-    parse(nbt, reader)
+  if(reader.bufferLeft.byteLength != 0) {
+    parser(nbtData, reader);
   }
 
-  return nbt;
+  return nbtData;
 }
 
-export function parser(data : ArrayBuffer) {
-  console.log(new Uint8Array(data));
-  
-  return parse({}, Reader(data));
+export function parse(data : ArrayBuffer) {
+  return parser({}, new BinaryReader(data));
 }
 

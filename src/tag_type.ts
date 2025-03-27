@@ -1,4 +1,4 @@
-const tag = {
+const tagTypes = {
   END: 0,
   BYTE: 1,
   SHORT: 2,
@@ -14,6 +14,6 @@ const tag = {
   LONG_ARRAY: 12
 } as const;
 
-export type Tag = typeof tag[keyof typeof tag];
+export type TagType = typeof tagTypes[keyof typeof tagTypes];
 
-export {tag};
+export {tagTypes};
