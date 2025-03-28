@@ -1,5 +1,5 @@
-import { PrimitiveType } from "../primitives/index.ts";
-import { List } from "./list.ts";
+import type { PrimitiveType } from "../primitives/index.ts";
+import type { List } from "./list.ts";
 
 /**
  * This type represents a NBT Compound.
