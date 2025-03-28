@@ -16,7 +16,7 @@ import type {
 
 import type { Data as _Data } from './data.ts'
 
-/** This namespace contains all NBT types */
+/** This namespace contains all NBT types. */
 export namespace NBT {
   /** This type represents a NBT Byte. */
   export type Byte = _Byte;
