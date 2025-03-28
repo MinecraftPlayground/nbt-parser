@@ -1,9 +1,7 @@
 import type { PrimitiveType } from "../primitives/index.ts";
 import type { List } from "./list.ts";
 
-/**
- * This type represents a NBT Compound.
- */
+/** This type represents a NBT Compound. */
 export interface Compound {
   [key : string] :
     | Compound

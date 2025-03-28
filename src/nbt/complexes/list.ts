@@ -9,9 +9,7 @@ import type {
 
 import type { Compound } from "./compound.ts";
 
-/**
- * This type represents a NBT List.
- */
+/** This type represents a NBT List. */
 export type List =
   | List[]
   | Compound[]
