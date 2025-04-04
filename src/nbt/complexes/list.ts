@@ -1,5 +1,5 @@
 import type { PrimitiveType } from "../primitives/index.ts";
-import type { Compound } from "./compound.ts";
+import type { CompoundInList } from "./compound_in_list.ts";
 
 // deno-lint-ignore no-explicit-any
 type PrimitiveTypeArray<Type = PrimitiveType> = Type extends any ? Type[] : never;
@@ -7,5 +7,5 @@ type PrimitiveTypeArray<Type = PrimitiveType> = Type extends any ? Type[] : neve
 /** This type represents a NBT List. */
 export type List =
   | List[]
-  | Compound[]
+  | CompoundInList[]
   | PrimitiveTypeArray
