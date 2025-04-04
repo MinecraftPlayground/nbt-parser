@@ -9,4 +9,3 @@ export type List =
   | List[]
   | Compound[]
   | PrimitiveTypeArray
-
