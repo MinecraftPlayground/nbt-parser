@@ -1,3 +1,4 @@
+
 const tagTypes = {
   END: 0,
   BYTE: 1,
