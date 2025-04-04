@@ -1,5 +1,5 @@
 import { BinaryReader } from 'jsr:@typescriptplayground/binary-reader'
-import { tagTypes } from "../tag_type.ts";
+import { tagTypes } from "../nbt/tag_types.ts";
 import { getTagName } from "./get_tag_name.ts";
 
 function parser(nbtData : any, reader : BinaryReader, tagType? : number) : unknown {
