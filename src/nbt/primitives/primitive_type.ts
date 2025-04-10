@@ -1,8 +1,11 @@
 import type { Byte } from "./byte.ts";
+import type { ByteArray } from "./byte_array.ts";
 import type { Double } from "./double.ts";
 import type { Float } from "./float.ts";
 import type { Int } from "./int.ts";
+import type { IntArray } from "./int_array.ts";
 import type { Long } from "./long.ts";
+import type { LongArray } from "./long_array.ts";
 import type { Short } from "./short.ts";
 
 /** This type represents a primitive NBT Type. */
@@ -14,6 +17,6 @@ export type PrimitiveType =
   | Float
   | Double
   | string
-  | Byte[]
-  | Int[]
-  | Long[];
+  | ByteArray
+  | IntArray
+  | LongArray;
