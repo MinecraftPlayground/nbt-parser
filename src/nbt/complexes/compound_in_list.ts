@@ -4,5 +4,12 @@ import type { List } from "./list.ts";
 
 /** This type represents a NBT Compound in a List. */
 export type CompoundInList = {
-  [key : string] : typeof key extends '' ? CompoundInList : List | PrimitiveType;
+  [key : string] : typeof key extends ''
+    ? 
+      | Compound
+      | List
+      | PrimitiveType
+    : 
+      | List
+      | PrimitiveType
 }
