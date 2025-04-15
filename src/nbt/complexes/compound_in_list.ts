@@ -6,10 +6,10 @@ import type { List } from "./list.ts";
 export type CompoundInList = {
   [key : string] : typeof key extends ''
     ? 
-      | Compound
       | List
       | PrimitiveType
     : 
+      | Compound
       | List
       | PrimitiveType
 }
