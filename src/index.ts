@@ -1,7 +1,19 @@
-import type { List } from "./nbt/complex/index.ts";
+import type { NBT } from "./nbt/index.ts";
 
-const listA : List = [{'': {}}] // Error
-const listB : List = [{'b': {}}] // No Error
-const listC : List = [{'': []}] // No Error
-const listD : List = [{'': undefined}] // Error
-
+const data : NBT.Data = {
+  name: "test",
+  myList: [1, 2, 3],
+  myOtherList: [
+    {
+      '': 1
+    },
+    {
+      '': 1,
+      a: []
+    },
+    {
+      b: {}
+    },
+    {}
+  ]
+}
