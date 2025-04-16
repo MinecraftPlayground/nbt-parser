@@ -5,4 +5,4 @@ export type { Long } from './long.ts'
 export type { Float } from './float.ts'
 export type { Double } from './double.ts'
 
-export type { PrimitiveType } from './primitive_type.ts'
+export type { SimpleType } from './simple_type.ts'

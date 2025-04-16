@@ -5,14 +5,14 @@ import type {
   Int as _Int,
   Long as _Long,
   Short as _Short,
-  PrimitiveType as _PrimitiveType
-} from './primitives/index.ts';
+  SimpleType as _SimpleType
+} from './simple/index.ts';
 
 import type {
   List as _List,
   Compound as _Compound,
   ComplexType as _ComplexType
-} from './complexes/index.ts';
+} from './complex/index.ts';
 
 import type { Data as _Data } from './data.ts'
 
@@ -31,7 +31,7 @@ export namespace NBT {
   /** This type represents a NBT Short. */
   export type Short = _Short;
   /** This type represents a primitive NBT Type. */
-  export type PrimitiveType = _PrimitiveType
+  export type SimpleType = _SimpleType
 
   /** This type represents a NBT List. */
   export type List = _List

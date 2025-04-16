@@ -9,7 +9,7 @@ import type { LongArray } from "./long_array.ts";
 import type { Short } from "./short.ts";
 
 /** This type represents a primitive NBT Type. */
-export type PrimitiveType =
+export type SimpleType =
   | Byte
   | Short
   | Int
