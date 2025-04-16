@@ -11,6 +11,7 @@ import type {
 import type {
   List as _List,
   Compound as _Compound,
+  CompoundInList as _CompoundInList,
   ComplexType as _ComplexType
 } from './complex/index.ts';
 
@@ -37,6 +38,8 @@ export namespace NBT {
   export type List = _List
   /** This type represents a NBT Compound. */
   export type Compound = _Compound
+  /** This type represents a NBT Compound in a List. */
+  export type CompoundInList = _CompoundInList
   /** This type represents a complex NBT Type. */
   export type ComplexType = _ComplexType
   
