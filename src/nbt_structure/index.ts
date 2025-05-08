@@ -18,7 +18,7 @@ import type {
 import type { Data as _Data } from './data.ts'
 
 /** This namespace contains all NBT types. */
-export namespace NBT {
+export namespace NBTStructure {
   /** This type represents a NBT Byte. */
   export type Byte = _Byte;
   /** This type represents a NBT Double. */
