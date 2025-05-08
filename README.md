@@ -4,6 +4,14 @@ The following bytes are represented in binary. All values are represented in Big
 ## Tag Types
 Root Tag in a NBT file must always be a [Compound](#compound) Tag.
 
+### End
+> Represents the end of a [Compound](#compound) Tag.
+
+|         | Identifier |
+|---------|------------|
+| n Bytes | 1          |
+| Default | `00`       |
+
 ### Byte
 > Represents a Byte.
 
