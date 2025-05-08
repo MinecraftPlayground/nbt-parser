@@ -3,6 +3,12 @@
     "@std/assert": "jsr:@std/assert@^1.0.7",
     "@typescriptplayground/binary-reader": "jsr:@typescriptplayground/binary-reader@^0.3.0"
   },
+  "compilerOptions": {
+    "lib": [
+      "decorators",
+      "esnext"
+    ]
+  },
   "lint": {
     "rules": {
       "tags": [
