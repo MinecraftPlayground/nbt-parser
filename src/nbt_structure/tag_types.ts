@@ -15,6 +15,7 @@ const tagTypes = {
   LONG_ARRAY: 12
 } as const;
 
+/** This type represents a NBT Tag Type. */
 export type TagType = typeof tagTypes[keyof typeof tagTypes];
 
 export {tagTypes};

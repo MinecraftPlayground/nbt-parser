@@ -1,138 +1,107 @@
-import { BinaryReader } from 'jsr:@typescriptplayground/binary-reader'
-import { tagTypes } from "../nbt/tag_types.ts";
+import BinaryReader from "https://jsr.io/@typescriptplayground/binary-reader/0.3.0/src/binary_reader.ts";
+import { NBTStructure } from "../nbt_structure/index.ts";
 import { getTagName } from "./get_tag_name.ts";
 
-function parser(nbtData : any, reader : BinaryReader, tagType? : number) : unknown {
+/**
+ * This function parses the NBT data recursively.
+ *
+ * @param data The binary data of the NBT file
+ * @returns The parsed NBT structure.
+ */
+export function parse(
+  reader : BinaryReader,
+  currentNbtData : NBTStructure.Data,
+  currentTagName? : string,
+  currentTagType? : NBTStructure.TagType
+) : NBTStructure.Data {
 
-  let tagName = '';
-  let type;
-  
-  if (!tagType) {
-    type = reader.readUint8()
-    tagName = getTagName(reader)
-  }
+  const tagType : NBTStructure.TagType = currentTagType ?? reader.readUint8() as NBTStructure.TagType;
 
-  switch(type) {
-    case tagTypes.BYTE: {
-      console.log('reading BYTE')
-
-      if (!tagType) {
-        nbtData[tagName] = reader.readInt8();
-      } else {
-        return reader.readInt8();
+  if (tagType != NBTStructure.tagTypes.END) {
+    
+    const tagName = currentTagName ?? getTagName(reader);
+    
+    switch(tagType) {
+      case NBTStructure.tagTypes.BYTE: {
+        currentNbtData[tagName] = reader.readInt8();
+        break;
       }
       
-
-      break;
-    }
-
-    case tagTypes.BYTE_ARRAY: {
-      console.log('reading BYTE_ARRAY')
-
-      const arrayLength = reader.readUint32();
-      nbtData[tagName] = new Array(arrayLength).fill(0).map(() => reader.readInt8());
-
-      break;
-    }
-
-    case tagTypes.DOUBLE: {
-      console.log('reading DOUBLE')
-
-      nbtData[tagName] = reader.readFloat64();
-
-      break;
-    }
-
-    case tagTypes.FLOAT: {
-      console.log('reading FLOAT')
-
-      nbtData[tagName] = reader.readFloat32();
-
-      break;
-    }
-
-    case tagTypes.INT: {
-      console.log('reading INT')
-
-      nbtData[tagName] = reader.readUint32();
-
-      break;
-    }
-
-    case tagTypes.INT_ARRAY: {
-      console.log('reading INT_ARRAY')
+      case NBTStructure.tagTypes.SHORT: {
+        currentNbtData[tagName] = reader.readInt16();
+        break;
+      }
       
-      const arrayLength = reader.readUint32();      
-      nbtData[tagName] = new Array(arrayLength).fill(0).map(() => reader.readUint32());
-
-      break;
-    }
-
-    case tagTypes.LONG: {
-      console.log('reading LONG')
-
-      nbtData[tagName] = reader.readUint64();
-
-      break;
-    }
-
-    case tagTypes.LONG_ARRAY: {
-      console.log('reading LONG_ARRAY')
+      case NBTStructure.tagTypes.INT: {
+        currentNbtData[tagName] = reader.readInt32();
+        break;
+      }
       
-      const arrayLength = reader.readUint32();
-      nbtData[tagName] = new Array(arrayLength).fill(0).map(() => reader.readUint64());
-
-      break;
-    }
-
-    case tagTypes.SHORT: {
-      console.log('reading SHORT')
+      case NBTStructure.tagTypes.LONG: {
+        currentNbtData[tagName] = reader.readInt64();
+        break;
+      }
       
-      nbtData[tagName] = reader.readUint16();
-
-      break;
-    }
-
-    case tagTypes.STRING: {
-      console.log('reading STRING')
+      case NBTStructure.tagTypes.FLOAT: {
+        currentNbtData[tagName] = reader.readFloat32();
+        break;
+      }
       
-      const stringLength = reader.readUint16();
-      nbtData[tagName] = new TextDecoder().decode(reader.read(stringLength))
-
-      break;
-    }
-
-    case tagTypes.COMPOUND: {
-      console.log('reading COMPOUND')
-
-      nbtData[tagName] = parser({}, reader);
-      break;
-    }
-
-    case tagTypes.LIST: {
-      const arrayType = reader.readUint8();
-      const arrayLength = reader.readUint32();
-
-      console.log('reading LIST', arrayType, arrayLength)
-      nbtData[tagName] = new Array(arrayLength).fill(0).map(() => parser({}, reader, arrayType));
-      break;
-    }
-
-    default: {
-      console.log('reading Unknown', type, tagName);
+      case NBTStructure.tagTypes.DOUBLE: {
+        currentNbtData[tagName] = reader.readInt64();
+        break;
+      }
       
-      break;
+      case NBTStructure.tagTypes.BYTE_ARRAY: {
+        const arrayLength = reader.readInt32();
+        currentNbtData[tagName] = [...new Int8Array(reader.read(arrayLength))];
+        break;
+      }
+      
+      case NBTStructure.tagTypes.STRING: {
+        const stringLength = reader.readInt16();
+        currentNbtData[tagName] = new TextDecoder().decode(reader.read(stringLength));
+        break;
+      }
+      
+      case NBTStructure.tagTypes.LIST: {
+        const listTagType = reader.readUint8() as NBTStructure.TagType;
+        const listLength = reader.readUint32();
+        const list : NBTStructure.List = new Array<NBTStructure.Data>()
+        for (let i = 0; i < listLength; i++) {
+          list.push(parse(reader, {}, tagName, listTagType))
+        }
+        currentNbtData[tagName] = list;
+        break;
+      }
+      
+      case NBTStructure.tagTypes.COMPOUND: {
+        currentNbtData[tagName] = parse(reader, {});
+        break;
+      }
+      
+      case NBTStructure.tagTypes.INT_ARRAY: {
+        const arrayLength = reader.readInt32();
+        currentNbtData[tagName] = [...new Int8Array(reader.read(arrayLength))]
+        break;
+      }
+      
+      case NBTStructure.tagTypes.LONG_ARRAY: {
+        const arrayLength = reader.readInt32();
+        currentNbtData[tagName] = [...new Int8Array(reader.read(arrayLength))]
+        break;
+      }
+      
+      default: {
+        break;
+      }
     }
+    
   }
 
-  if(reader.bufferLeft) {
-    parser(nbtData, reader);
+  if(!reader.done) {
+    parse(reader, currentNbtData);
   }
 
-  return nbtData;
+  return currentNbtData;
 }
-
-export function parse(data : ArrayBuffer) {
-  return parser({}, new BinaryReader(data));
-}
-

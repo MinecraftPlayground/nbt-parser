@@ -16,6 +16,10 @@ import type {
 } from './complex/index.ts';
 
 import type { Data as _Data } from './data.ts'
+import {
+  tagTypes as _tagTypes,
+  type TagType as _TagType
+} from "./tag_types.ts";
 
 /** This namespace contains all NBT types. */
 export namespace NBTStructure {
@@ -45,4 +49,8 @@ export namespace NBTStructure {
   
   /** This type represents a NBT Data structure. */
   export type Data = _Data;
+  /** This type represents a NBT Tag Type. */
+  export type TagType = _TagType;
+
+  export const tagTypes = _tagTypes;
 }

@@ -1,9 +1,10 @@
 {
-  "version": "4",
+  "version": "5",
   "specifiers": {
     "jsr:@std/assert@^1.0.7": "1.0.7",
     "jsr:@std/internal@^1.0.5": "1.0.5",
-    "jsr:@typescriptplayground/binary-reader@*": "0.2.2"
+    "jsr:@typescriptplayground/binary-reader@*": "0.2.2",
+    "jsr:@typescriptplayground/binary-reader@0.3": "0.3.0"
   },
   "jsr": {
     "@std/assert@1.0.7": {
@@ -17,11 +18,15 @@
     },
     "@typescriptplayground/binary-reader@0.2.2": {
       "integrity": "c59ec48053ebf859afd67d30aeee579d87f369f71f24f22d7129860845cde524"
+    },
+    "@typescriptplayground/binary-reader@0.3.0": {
+      "integrity": "0aa7168b50ca263ac530e59602536f211805b1b718eb52ca245c5f66a14002a9"
     }
   },
   "workspace": {
     "dependencies": [
-      "jsr:@std/assert@^1.0.7"
+      "jsr:@std/assert@^1.0.7",
+      "jsr:@typescriptplayground/binary-reader@0.3"
     ]
   }
 }
